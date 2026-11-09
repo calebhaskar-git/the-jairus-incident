@@ -1,23 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
+import { Experience } from "@/components/jairus/experience";
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Jairus.exe | Birthday Chaos" },
+      { name: "description", content: "An interactive birthday scrapbook and affectionate roast for Jairus Melchiah — the bunny of the group." },
+      { property: "og:title", content: "Jairus.exe | Birthday Chaos" },
+      { property: "og:description", content: "Enter at your own risk. A chaotic birthday scrapbook for Jairus, from the group chat." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Experience,
+});
