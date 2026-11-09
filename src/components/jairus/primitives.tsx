@@ -92,7 +92,7 @@ export function BurstSticker({
   tone?: Tone;
   className?: string;
 }) {
-  const [fill, text] = burstFill[tone].split(" ");
+  const [fill = "", text = ""] = burstFill[tone].split(" ");
   return (
     <span className={cn("relative grid aspect-square place-items-center", className)}>
       <BurstShape className={fill} />

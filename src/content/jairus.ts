@@ -1,18 +1,30 @@
 /**
- * ✏️  EDIT ME — every word and every photo slot on the site lives in this file.
+ * ✏️  EDIT ME — the ORIGINAL words and media slots of the site live in this file.
  *
- * ─── HOW TO ADD A REAL PHOTO (shows for everyone) ─────────────────────────────
- *   1. Put the image in  src/assets/photos/   e.g. src/assets/photos/beach.jpg
- *   2. Import it at the top of this file:
- *        import beach from "@/assets/photos/beach.jpg";
- *   3. Set `src: beach` on the slot you want. The placeholder disappears.
- *   (Or upload the photos in the Lovable chat and say which slot each goes in.)
+ * There are two ways to change things:
+ *
+ * ─── 1. MEDIA CONTROL ROOM (in the browser, no code) ─────────────────────────
+ *   Press the ⚙ button (bottom-right) or "edit this site" in the footer.
+ *   Edits made there are saved in THAT browser on THAT device only (IndexedDB).
+ *   Visitors on other devices will NOT see them. Use "Export backup" to move
+ *   them to another browser.
+ *
+ * ─── 2. THIS FILE (shows for everyone who visits the built site) ─────────────
+ *   Photos / GIFs / videos:
+ *     a) Put the file in  src/assets/photos/   e.g. src/assets/photos/beach.jpg
+ *     b) Import it at the top of this file:
+ *          import beach from "@/assets/photos/beach.jpg";
+ *     c) Set `src: beach` on the slot you want. The placeholder disappears.
+ *        For a video also set `type: "video"` (and optionally `poster`).
+ *   OR put files in  public/media/  and use `src: "/media/beach.jpg"`.
  *
  * ─── PLACEHOLDERS ─────────────────────────────────────────────────────────────
  *   Anything in [square brackets] is a placeholder waiting for real words.
  *   Lore cards with `placeholder: true` show an "EDIT ME" stamp — set it to
  *   false once you've written the real thing.
  */
+
+import type { MediaType } from "@/lib/media-type";
 
 export type PhotoSlot = {
   /** stable id — also used to remember on-device previews */
@@ -21,6 +33,10 @@ export type PhotoSlot = {
   label: string;
   /** imported image. Leave undefined to show a placeholder slot. */
   src?: string | undefined;
+  /** "image" | "gif" | "video". Leave out to detect from the file extension. */
+  type?: MediaType | undefined;
+  /** still image shown before a video starts (videos only) */
+  poster?: string | undefined;
   alt: string;
   /** handwritten caption under the polaroid */
   caption: string;
